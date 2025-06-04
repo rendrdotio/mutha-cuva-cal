@@ -9,16 +9,6 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
-
-  async redirects() {
-    return [
-      {
-        source: "/design/:path*",
-        destination: "/",
-        permanent: false,
-      },
-    ];
-  },
 };
 
 export default withMDX(config);

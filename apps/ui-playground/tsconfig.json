@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "experimentalDecorators": true,
+    "moduleResolution": "bundler",
     "plugins": [
       {
         "name": "next"

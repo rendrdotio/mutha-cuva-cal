@@ -5,6 +5,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/page";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
@@ -29,10 +30,12 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
         <DocsDescription>{page.data.description}</DocsDescription>
 
         <DocsBody>
-          <TooltipProvider>
-            {/* @ts-expect-error idk why fumadocs doersnt like this */}
-            <MDX components={{ ...defaultMdxComponents, AutoTypeTable }} />
-          </TooltipProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <TooltipProvider>
+              {/* @ts-expect-error idk why fumadocs doersnt like this */}
+              <MDX components={{ ...defaultMdxComponents, AutoTypeTable }} />
+            </TooltipProvider>
+          </Suspense>
         </DocsBody>
       </DocsPage>
     </>
