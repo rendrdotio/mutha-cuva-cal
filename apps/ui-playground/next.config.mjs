@@ -6,11 +6,18 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   transpilePackages: ["@calcom/ui"],
-  // We are ignoring type errors in this playground to pass build -
-  // Calcom UI pulls in appstore and trpc and they have type errors
-  // when you dont have their d.ts imported into a workspace
   typescript: {
     ignoreBuildErrors: true,
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/design/:path*",
+        destination: "/",
+        permanent: false,
+      },
+    ];
   },
 };
 
