@@ -375,7 +375,7 @@
   "emailed_you_and_any_other_attendees": "We sent an email to everyone with this information.",
   "needs_to_be_confirmed_or_rejected": "Your booking still needs to be confirmed or rejected.",
   "needs_to_be_confirmed_or_rejected_recurring": "Your recurring meeting still needs to be confirmed or rejected.",
-  "user_needs_to_confirm_or_reject_booking": "{{user}} still needs to confirm or reject the booking.",
+  "user_needs_to_confirm_or_reject_booking": "All set. We’ve received your preferred time — we’ll confirm within 48 hours. After year one, services are typically completed between April and September.",
   "user_needs_to_confirm_or_reject_booking_recurring": "{{user}} still needs to confirm or reject each booking of the recurring meeting.",
   "meeting_is_scheduled": "This meeting is scheduled",
   "meeting_is_scheduled_recurring": "The recurring events are scheduled",
