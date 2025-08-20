@@ -183,7 +183,7 @@ const SlotItem = ({
                 )}
               />
             )}
-            {computedDateWithUsersTimezone.format(timeFormat)}
+            {computedDateWithUsersTimezone.hour() < 12 ? "Morning" : "Afternoon"}
           </div>
           {bookingFull && <p className="text-sm">{t("booking_full")}</p>}
           {hasTimeSlots && !bookingFull && (
