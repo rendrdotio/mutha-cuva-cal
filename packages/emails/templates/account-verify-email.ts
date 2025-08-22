@@ -28,7 +28,8 @@ export default class AccountVerifyEmail extends BaseEmail {
     const emailSubjectKey = this.verifyAccountInput.isSecondaryEmailVerification
       ? "verify_email_email_header"
       : "verify_email_subject";
-    return {
+
+    const payload = {
       to: `${this.verifyAccountInput.user.name} <${this.verifyAccountInput.user.email}>`,
       from: `${EMAIL_FROM_NAME} <${this.getMailerOptions().from}>`,
       subject: this.verifyAccountInput.language(emailSubjectKey, {
@@ -37,6 +38,9 @@ export default class AccountVerifyEmail extends BaseEmail {
       html: await renderEmail("VerifyAccountEmail", this.verifyAccountInput),
       text: this.getTextBody(),
     };
+
+    console.log("[EMAIL_FLOW] 6. AccountVerifyEmail.getNodeMailerPayload() returning:", payload);
+    return payload;
   }
 
   protected getTextBody(): string {

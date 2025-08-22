@@ -62,7 +62,7 @@ export default class BaseEmail {
 
     const parseSubject = z.string().safeParse(payload?.subject);
     const payloadWithUnEscapedSubject = {
-      headers: this.getMailerOptions().headers,
+      headers: this.getMailerOptions().headers as any,
       ...payload,
       ...{
         from: sanitizedFrom,
@@ -70,20 +70,38 @@ export default class BaseEmail {
       },
       ...(parseSubject.success && { subject: decodeHTML(parseSubject.data) }),
     };
+    console.log(
+      "[EMAIL_FLOW] 7. BaseEmail.sendEmail() - payloadWithUnEscapedSubject:",
+      payloadWithUnEscapedSubject
+    );
     const { createTransport } = await import("nodemailer");
+    console.log(
+      "[EMAIL_FLOW] 8. About to call createTransport().sendMail() with transport:",
+      this.getMailerOptions().transport
+    );
+
+    // Add the original email data as an additional property for our custom transport
+    const mailWithOriginalData = {
+      ...payloadWithUnEscapedSubject,
+      originalEmailData: {
+        from: payloadWithUnEscapedSubject.from,
+        to: payloadWithUnEscapedSubject.to,
+        subject: payloadWithUnEscapedSubject.subject,
+        html: (payloadWithUnEscapedSubject as any).html,
+        text: (payloadWithUnEscapedSubject as any).text,
+      },
+    };
+
     await new Promise((resolve, reject) =>
-      createTransport(this.getMailerOptions().transport).sendMail(
-        payloadWithUnEscapedSubject,
-        (_err, info) => {
-          if (_err) {
-            const err = getErrorFromUnknown(_err);
-            this.printNodeMailerError(err);
-            reject(err);
-          } else {
-            resolve(info);
-          }
+      createTransport(this.getMailerOptions().transport).sendMail(mailWithOriginalData, (_err, info) => {
+        if (_err) {
+          const err = getErrorFromUnknown(_err);
+          this.printNodeMailerError(err);
+          reject(err);
+        } else {
+          resolve(info);
         }
-      )
+      })
     ).catch((e) =>
       console.error(
         "sendEmail",

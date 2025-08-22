@@ -87,7 +87,9 @@ type EventTypeMetadata = z.infer<typeof EventTypeMetaDataSchema>;
 const sendEmail = (prepare: () => BaseEmail) => {
   return new Promise((resolve, reject) => {
     try {
+      console.log("[EMAIL_FLOW] 4. sendEmail called, preparing email...");
       const email = prepare();
+      console.log("[EMAIL_FLOW] 5. Email prepared, calling sendEmail() on:", email.constructor.name);
       resolve(email.sendEmail());
     } catch (e) {
       reject(console.error(`${prepare.constructor.name}.sendEmail failed`, e));
@@ -587,6 +589,7 @@ export const sendOrganizationAdminNoSlotsNotification = async (
 };
 
 export const sendEmailVerificationLink = async (verificationInput: EmailVerifyLink) => {
+  console.log("[EMAIL_FLOW] 3. sendEmailVerificationLink called with:", verificationInput);
   await sendEmail(() => new AccountVerifyEmail(verificationInput));
 };
 

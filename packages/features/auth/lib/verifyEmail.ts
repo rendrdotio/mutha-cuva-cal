@@ -32,6 +32,13 @@ export const sendEmailVerification = async ({
   secondaryEmailId,
   isPlatform = false,
 }: VerifyEmailType) => {
+  console.log("[EMAIL_FLOW] 1. sendEmailVerification called with:", {
+    email,
+    language,
+    username,
+    secondaryEmailId,
+    isPlatform,
+  });
   const token = randomBytes(32).toString("hex");
   const translation = await getTranslation(language ?? "en", "common");
   const featuresRepository = new FeaturesRepository();
@@ -68,6 +75,13 @@ export const sendEmailVerification = async ({
 
   const params = new URLSearchParams({
     token,
+  });
+
+  console.log("[EMAIL_FLOW] 2. About to call sendEmailVerificationLink with:", {
+    language: translation,
+    verificationEmailLink: `${WEBAPP_URL}/api/auth/verify-email?${params.toString()}`,
+    user: { email, name: username },
+    isSecondaryEmailVerification: !!secondaryEmailId,
   });
 
   await sendEmailVerificationLink({

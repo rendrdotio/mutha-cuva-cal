@@ -267,7 +267,7 @@ export const AvailableTimes = ({
   ...props
 }: AvailableTimesProps) => {
   const { t } = useLocale();
-  console.log("slots", slots);
+
   const oooAllDay = slots.every((slot) => slot.away);
   if (oooAllDay) {
     return <OOOSlot {...slots[0]} />;
