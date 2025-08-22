@@ -183,7 +183,8 @@ const SlotItem = ({
                 )}
               />
             )}
-            {computedDateWithUsersTimezone.hour() < 12 ? "Morning" : "Afternoon"}
+            {/* custom time slot text muthacuva */}
+            {computedDateWithUsersTimezone.hour() < 12 ? "Morning (9am - 1pm)" : "Afternoon (1pm - 5pm)"}
           </div>
           {bookingFull && <p className="text-sm">{t("booking_full")}</p>}
           {hasTimeSlots && !bookingFull && (

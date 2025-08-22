@@ -8,7 +8,6 @@ import { BookerLayouts } from "@calcom/prisma/zod-utils";
 import classNames from "@calcom/ui/classNames";
 
 import { useBookerStore } from "../Booker/store";
-import { TimeFormatToggle } from "./TimeFormatToggle";
 
 type AvailableTimesHeaderProps = {
   date: Dayjs;
@@ -65,11 +64,13 @@ export const AvailableTimesHeader = ({
         </span>
       </span>
 
+      {/* 
+      hide time format toggle muthacuva
       {showTimeFormatToggle && (
         <div className="ml-auto rtl:mr-auto">
           <TimeFormatToggle customClassName={customClassNames?.availableTimeSlotsTimeFormatToggle} />
         </div>
-      )}
+      )} */}
     </header>
   );
 };

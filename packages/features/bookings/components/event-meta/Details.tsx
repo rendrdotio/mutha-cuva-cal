@@ -10,8 +10,6 @@ import { Icon } from "@calcom/ui/components/icon";
 import { type IconName } from "@calcom/ui/components/icon";
 
 import { EventDetailBlocks } from "../../types";
-import { AvailableEventLocations } from "./AvailableEventLocations";
-import { EventDuration } from "./Duration";
 import { EventOccurences } from "./Occurences";
 import { Price } from "./Price";
 
@@ -142,19 +140,21 @@ export const EventDetails = ({ event, blocks = defaultEventDetailsBlocks }: Even
 
         switch (block) {
           case EventDetailBlocks.DURATION:
-            return (
+            /* return (
               <EventMetaBlock key={block} icon="clock" className="items-center">
                 <EventDuration event={event} />
               </EventMetaBlock>
-            );
+            ); */
+            return null; // hide duration meta muthacuva
 
           case EventDetailBlocks.LOCATION:
             if (!event?.locations?.length || isInstantMeeting) return null;
-            return (
+            /* return (
               <EventMetaBlock key={block}>
                 <AvailableEventLocations locations={event.locations} />
               </EventMetaBlock>
-            );
+            ); */
+            return null; // hide location meta muthacuva
 
           case EventDetailBlocks.REQUIRES_CONFIRMATION:
             if (!event.requiresConfirmation) return null;
